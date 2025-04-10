@@ -66,6 +66,7 @@ const Login = () => {
           <a onClick={gotoSignup} style={{ cursor: "pointer" }}>
             Don't have an account?
           </a>
+          <a onClick={()=>{navigate("/forgotpsd");}} style={{ cursor: "pointer" }}>Forgot Password</a>
         </form>
       </div>
     </div>

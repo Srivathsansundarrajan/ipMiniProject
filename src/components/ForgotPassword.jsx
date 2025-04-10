@@ -5,13 +5,13 @@ import {useState} from 'react'
 import axios from 'axios'
 
 
-const Signup = () => {
+const ForgotPassword = () => {
     const navigate = useNavigate();
     const gotoLogin = ()=>{
        navigate("/");
     }
 
-    const [credentials, setCredentials] = useState({ name :"",email: "", psd: "" ,con_psd:""});
+    const [credentials, setCredentials] = useState({ email: "", psd: "" ,con_psd:""});
     const[error,setError] = useState("");
 
     const handleSignup = async (event) => {
@@ -21,21 +21,21 @@ const Signup = () => {
         if(credentials.psd === credentials.con_psd){
           
             try {
-              const res = await axios.post("http://localhost:3000/signup", {"name":credentials.name,"email":credentials.email,"psd":credentials.psd});
+              const res = await axios.put("http://localhost:3000/forgotpsd", {"email":credentials.email,"psd":credentials.psd});
         
               if (res.status === 200) {
-                alert("Signed up Successfully.");
+                alert("Password channged Successfully.");
                 navigate("/");
               }
             } catch (error) {
                 setError(error.response?.data?.message);
-                navigate("/signup");
+                navigate("/forgotpsd");
             }
           }
 
           else{
             setError("Password mismatched🙄");
-            navigate("/signup");
+            navigate("/ForgotPsd");
           }
       };
 
@@ -48,10 +48,9 @@ const Signup = () => {
         
         <form onSubmit={handleSignup}>            
           <h2>Sign Up</h2>
-          <input type="text" placeholder="Enter your name" value = {credentials.name} onChange={(e) =>setCredentials((prev) => ({ ...prev, name: e.target.value }))} required />
           <input type="email" placeholder="Enter your email" value = {credentials.email} onChange={(e) =>setCredentials((prev) => ({ ...prev, email: e.target.value }))} required />
-          <input type="password" placeholder="Enter your password"  value = {credentials.psd} onChange={(e) =>setCredentials((prev) => ({ ...prev, psd: e.target.value }))} required  />
-          <input type="password" placeholder="Reenter your password"  value = {credentials.con_psd} onChange={(e) =>setCredentials((prev) => ({ ...prev, con_psd: e.target.value }))} required />
+          <input type="password" placeholder="Enter your new password"  value = {credentials.psd} onChange={(e) =>setCredentials((prev) => ({ ...prev, psd: e.target.value }))} required  />
+          <input type="password" placeholder="Reenter your new password"  value = {credentials.con_psd} onChange={(e) =>setCredentials((prev) => ({ ...prev, con_psd: e.target.value }))} required />
           <div
             style={{
               color: "rgb(255, 237, 39)",
@@ -63,7 +62,7 @@ const Signup = () => {
           >
             {error}
           </div>
-          <input type="submit" value="Signup" />
+          <input type="submit" value="Change Password" />
           <a onClick={gotoLogin}>already having a account?</a>
         </form>
       </div>
@@ -71,4 +70,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default ForgotPassword;
