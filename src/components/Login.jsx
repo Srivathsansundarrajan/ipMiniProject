@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../CSS/login.css";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router-dom"
+import img from "../assets/login_img.png";
 
 const Login = () => {
   const navigate = useNavigate();
